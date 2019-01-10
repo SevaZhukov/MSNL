@@ -17,7 +17,7 @@ class FirstFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_first, container, false)
-        msFragmentManager = fragmentManager as MSFragmentManager
+        msFragmentManager = MSFragmentManager.instance
         v.button.setOnClickListener {
             msFragmentManager.navigate(FirstNextFragment())
         }

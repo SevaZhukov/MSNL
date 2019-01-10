@@ -4,18 +4,28 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
-class MSFragmentManager(private val fragmentManager: FragmentManager) {
+class MSFragmentManager(val fragmentManager: FragmentManager) {
 
     var globalContainerId: Int = 0
     var localContainerId: Int = 0
 
-    var backStack: MutableList<Fragment> = fragmentManager.fragments
+    var backStack: MutableList<Fragment>
+    lateinit var lastTag: String
+
+    init {
+        instance = this
+        backStack = fragmentManager.fragments
+    }
+
+    companion object {
+        lateinit var instance: MSFragmentManager
+    }
 
     fun navigate(fragment: Fragment, args: Bundle?) {
         fragment.arguments = args
         fragmentManager.beginTransaction()
                 .replace(localContainerId, fragment)
-                .addToBackStack(getCurrentFragment().tag)
+                .addToBackStack(getCurrentFragmentTag())
                 .commit()
     }
 
@@ -38,7 +48,7 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         fragment.arguments = args
         fragmentManager.beginTransaction()
                 .replace(globalContainerId, fragment)
-                .addToBackStack(getCurrentFragment().tag)
+                .addToBackStack(getCurrentFragmentTag())
                 .commit()
     }
 
@@ -57,14 +67,14 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         replaceGlobal(fragment, null)
     }
 
-    fun add(fragment: Fragment) {
+    fun add(containerId: Int, fragment: Fragment) {
         fragmentManager.beginTransaction()
-                .add(fragment, fragment.tag)
+                .add(containerId, fragment, fragment.tag)
                 .commit()
     }
 
-    private fun getCurrentFragment(): Fragment {
-        return backStack.last()
+    private fun getCurrentFragmentTag(): String? {
+        return null
     }
 
     fun addOnBackStackChangedListener(function: () -> Unit) {

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="one" />
-    <item android:title="two" />
-    <item android:title="three" />
+    <item
+        android:id="@+id/one_item"
+        android:title="one" />
+    <item
+        android:id="@+id/two_item"
+        android:title="two" />
+    <item
+        android:id="@+id/three_item"
+        android:title="three" />
 </menu>
