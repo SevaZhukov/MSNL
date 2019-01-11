@@ -22,7 +22,7 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         fragment.arguments = args
         fragmentManager.beginTransaction()
                 .replace(localContainerId, fragment)
-                .addToBackStack(getCurrentFragmentTag())
+                .addToBackStack(getCurrentFragment())
                 .commit()
     }
 
@@ -45,7 +45,7 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         fragment.arguments = args
         fragmentManager.beginTransaction()
                 .replace(globalContainerId, fragment)
-                .addToBackStack(getCurrentFragmentTag())
+                .addToBackStack(getCurrentFragment())
                 .commit()
     }
 
@@ -70,8 +70,13 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
                 .commit()
     }
 
-    private fun getCurrentFragmentTag(): String? {
-        return null
+    fun add(fragment: Fragment) {
+        add(localContainerId, fragment)
+    }
+
+    private fun getCurrentFragment(): String? {
+        log("getCurrentFragment ${fragmentManager.fragments.last()}")
+        return fragmentManager.fragments.last().toString()
     }
 
     fun addOnBackStackChangedListener(function: () -> Unit) {
@@ -95,6 +100,8 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
             fragmentManager.fragments.add(it)
         }
     }
+
+
 
 
 }

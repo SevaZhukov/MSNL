@@ -9,6 +9,8 @@ import com.memebattle.msnl.MSFragmentManager
 import com.memebattle.msnl.MSNavigation
 import com.memebattle.multistacknavigationlibrary.R
 import com.memebattle.multistacknavigationlibrary.main.fragment.FirstFragment
+import com.memebattle.multistacknavigationlibrary.main.fragment.SecondFragment
+import com.memebattle.multistacknavigationlibrary.main.fragment.ThirdFragment
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
@@ -20,10 +22,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val msFragmentManager = MSFragmentManager.instance
-        msFragmentManager.add(R.id.local_container, FirstFragment())
         msFragmentManager.globalContainerId = R.id.global_container
         msFragmentManager.localContainerId = R.id.local_container
         val msNavigation = MSNavigation(msFragmentManager)
-        msNavigation.setupNavigation(view.bottomNavigationView)
+        val fragments = arrayListOf(FirstFragment(), SecondFragment(), ThirdFragment())
+        msNavigation.setupNavigation(view.bottomNavigationView, fragments)
     }
 }
