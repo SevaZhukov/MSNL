@@ -3,14 +3,14 @@ package com.memebattle.msnl
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.memebattle.goldextensions.log
 
-class MSFragmentManager(val fragmentManager: FragmentManager) {
+class MSFragmentManager(private val fragmentManager: FragmentManager) {
 
     var globalContainerId: Int = 0
     var localContainerId: Int = 0
 
     var backStack: MutableList<Fragment>
-    lateinit var lastTag: String
 
     init {
         instance = this
@@ -27,6 +27,8 @@ class MSFragmentManager(val fragmentManager: FragmentManager) {
                 .replace(localContainerId, fragment)
                 .addToBackStack(getCurrentFragmentTag())
                 .commit()
+        log("ms bs $backStack")
+        log("ms frs ${fragmentManager.fragments}")
     }
 
     fun navigate(fragment: Fragment) {
@@ -86,7 +88,6 @@ class MSFragmentManager(val fragmentManager: FragmentManager) {
     fun show() {
         fragmentManager.beginTransaction()
                 .show(fragmentManager.fragments.last())
-
     }
 
 

@@ -13,16 +13,12 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
 
     fun setupNavigation(bottomNavigationView: BottomNavigationView) {
         val menu = bottomNavigationView.menu
-        log("setupNavigation ${menu.size}")
         val title = menu[0].title.toString()
         mapOfStacks[title] = msFragmentManager.backStack
         orderOfStacks.add(title)
         for (i: Int in 1 until menu.size()) {
-            log("setupNavigation i $i")
             mapOfStacks[menu[i].title.toString()] = mutableListOf()
         }
-        log(mapOfStacks.toString())
-        log(orderOfStacks.toString())
         bottomNavigationView.setOnNavigationItemSelectedListener { item -> onItemSelected(item) }
         msFragmentManager.addOnBackStackChangedListener {
             log("current backstack ${orderOfStacks.last()} ${msFragmentManager.backStack}")
@@ -30,10 +26,7 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
     }
 
     private fun onItemSelected(item: MenuItem): Boolean {
-        log("onItemSelected")
-        log("${msFragmentManager.backStack}")
         msFragmentManager.backStack = mapOfStacks[item.title]!!
-        log("${msFragmentManager.backStack}")
         msFragmentManager.replace(msFragmentManager.backStack.last())
         val title = item.title.toString()
         orderOfStacks.remove(title)
