@@ -10,11 +10,8 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
     var globalContainerId: Int = 0
     var localContainerId: Int = 0
 
-    var backStack: MutableList<Fragment>
-
     init {
         instance = this
-        backStack = fragmentManager.fragments
     }
 
     companion object {
@@ -27,8 +24,6 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
                 .replace(localContainerId, fragment)
                 .addToBackStack(getCurrentFragmentTag())
                 .commit()
-        log("ms bs $backStack")
-        log("ms frs ${fragmentManager.fragments}")
     }
 
     fun navigate(fragment: Fragment) {
@@ -88,6 +83,17 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
     fun show() {
         fragmentManager.beginTransaction()
                 .show(fragmentManager.fragments.last())
+    }
+
+    fun getBackStack(): MutableList<Fragment> {
+        return fragmentManager.fragments
+    }
+
+    fun setBackStack(backStack: MutableList<Fragment>) {
+        fragmentManager.fragments.clear()
+        backStack.forEach {
+            fragmentManager.fragments.add(it)
+        }
     }
 
 
