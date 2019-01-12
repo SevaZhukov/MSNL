@@ -40,8 +40,9 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
             msFragmentManager.setBackStack(mapOfStacks[item.title.toString()]!!)
         }
         val title = item.title.toString()
-        orderOfStacks.remove(title)
-        orderOfStacks.add(title)
+        orderOfStacks.addStack(title)
+        /*orderOfStacks.remove(title)
+        orderOfStacks.add(title)*/
         log("$orderOfStacks")
         return true
     }
