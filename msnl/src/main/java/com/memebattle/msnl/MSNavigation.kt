@@ -9,7 +9,7 @@ import com.memebattle.goldextensions.log
 class MSNavigation(private val msFragmentManager: MSFragmentManager) {
     private val orderOfStacks = arrayListOf<String>()
     private val mapOfStacks = hashMapOf<String, MutableList<Fragment>>()
-    private val startFragments = hashMapOf<String, Fragment>()
+    private val mapOfStartFragments = hashMapOf<String, Fragment>()
 
     fun setupNavigation(bottomNavigationView: BottomNavigationView, fragments: ArrayList<Fragment>) {
         val menu = bottomNavigationView.menu
@@ -17,8 +17,9 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
         mapOfStacks[title] = msFragmentManager.getBackStack()
         orderOfStacks.add(title)
         for (i: Int in 1 until menu.size()) {
-            mapOfStacks[menu[i].title.toString()] = mutableListOf()
-            startFragments[menu[i].title.toString()] = fragments[i]
+            val curTitle = menu[i].title.toString()
+            mapOfStacks[curTitle] = mutableListOf()
+            mapOfStartFragments[curTitle] = fragments[i]
         }
         msFragmentManager.add(fragments[0])
         bottomNavigationView.setOnNavigationItemSelectedListener { item -> onItemSelected(item) }
@@ -28,15 +29,15 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
     }
 
     private fun onItemSelected(item: MenuItem): Boolean {
-
+        val prevItem = orderOfStacks.last()
+        mapOfStacks[prevItem] = msFragmentManager.getBackStack()
+        log("prev ${mapOfStacks[prevItem]}")
         if(mapOfStacks[item.title]!!.isEmpty()) {
-            log("empty ${item.title} ${startFragments[item.title.toString()]}")
-            msFragmentManager.navigate(startFragments[item.title.toString()]!!)
+            log("empty")
+            msFragmentManager.navigate(mapOfStartFragments[item.title.toString()]!!)
         } else {
             log("full")
-            msFragmentManager.setBackStack(mapOfStacks[item.title]!!)
-            log("getBackStack last ${msFragmentManager.getBackStack().last()}")
-            msFragmentManager.replace(msFragmentManager.getBackStack().last())
+            msFragmentManager.setBackStack(mapOfStacks[item.title.toString()]!!)
         }
         val title = item.title.toString()
         orderOfStacks.remove(title)

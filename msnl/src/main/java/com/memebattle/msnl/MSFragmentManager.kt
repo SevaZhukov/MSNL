@@ -99,6 +99,9 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         backStack.forEach {
             fragmentManager.fragments.add(it)
         }
+        replace(backStack.last())
+        log("replace")
+        log("cur backstack $backStack")
     }
 
 
