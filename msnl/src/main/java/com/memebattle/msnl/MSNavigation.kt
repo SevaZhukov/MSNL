@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.memebattle.goldextensions.log
 
 class MSNavigation(private val msFragmentManager: MSFragmentManager) {
+
     private val orderOfStacks = arrayListOf<String>()
     private val mapOfStacks = hashMapOf<String, MutableList<Fragment>>()
     private val mapOfStartFragments = hashMapOf<String, Fragment>()
@@ -23,27 +24,23 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
         }
         msFragmentManager.add(fragments[0])
         bottomNavigationView.setOnNavigationItemSelectedListener { item -> onItemSelected(item) }
-        msFragmentManager.addOnBackStackChangedListener {
-            log("current backstack ${orderOfStacks.last()} ${msFragmentManager.getBackStack()}")
-        }
     }
 
     private fun onItemSelected(item: MenuItem): Boolean {
         val prevItem = orderOfStacks.last()
         mapOfStacks[prevItem] = msFragmentManager.getBackStack()
-        log("prev ${mapOfStacks[prevItem]}")
-        if(mapOfStacks[item.title]!!.isEmpty()) {
-            log("empty")
+        if (mapOfStacks[item.title]!!.isEmpty()) {
             msFragmentManager.navigate(mapOfStartFragments[item.title.toString()]!!)
         } else {
-            log("full")
             msFragmentManager.setBackStack(mapOfStacks[item.title.toString()]!!)
         }
         val title = item.title.toString()
         orderOfStacks.addStack(title)
-        /*orderOfStacks.remove(title)
-        orderOfStacks.add(title)*/
-        log("$orderOfStacks")
         return true
+    }
+
+    fun onBackPressed() {
+        log("on back press msnav")
+
     }
 }

@@ -76,18 +76,7 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
 
     private fun getCurrentFragment(): String? {
         log("getCurrentFragment ${fragmentManager.fragments.last()}")
-        return fragmentManager.fragments.last().toString()
-    }
-
-    fun addOnBackStackChangedListener(function: () -> Unit) {
-        fragmentManager.addOnBackStackChangedListener {
-            function()
-        }
-    }
-
-    fun show() {
-        fragmentManager.beginTransaction()
-                .show(fragmentManager.fragments.last())
+        return fragmentManager.fragments.last().tag
     }
 
     fun getBackStack(): MutableList<Fragment> {
@@ -100,11 +89,5 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
             fragmentManager.fragments.add(it)
         }
         replace(backStack.last())
-        log("replace")
-        log("cur backstack $backStack")
     }
-
-
-
-
 }
