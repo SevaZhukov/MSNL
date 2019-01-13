@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/one_item"
-        android:title="one" />
+        android:id="@+id/news_item"
+        android:title="news" />
     <item
-        android:id="@+id/two_item"
-        android:title="two" />
+        android:id="@+id/messages_item"
+        android:title="messages" />
     <item
-        android:id="@+id/three_item"
-        android:title="three" />
+        android:id="@+id/friends_item"
+        android:title="friends" />
+    <item
+        android:id="@+id/profile_item"
+        android:title="profile" />
 </menu>

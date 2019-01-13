@@ -3,7 +3,6 @@ package com.memebattle.msnl
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.memebattle.goldextensions.log
 
 class MSFragmentManager(private val fragmentManager: FragmentManager) {
 
@@ -74,8 +73,11 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         add(localContainerId, fragment)
     }
 
+    fun addGlobal(fragment: Fragment) {
+        add(globalContainerId, fragment)
+    }
+
     private fun getCurrentFragment(): String? {
-        log("getCurrentFragment ${fragmentManager.fragments.last()}")
         return fragmentManager.fragments.last().tag
     }
 
