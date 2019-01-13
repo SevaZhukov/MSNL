@@ -90,4 +90,8 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         }
         replace(backStack.last())
     }
+
+    fun pop() {
+        fragmentManager.popBackStack()
+    }
 }

@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         log("on back press act")
         val fragment = this.supportFragmentManager.findFragmentById(R.id.global_container)
-        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+        (fragment as? IOnBackPressed)?.onBackPressed()
+        /*(fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
             //super.onBackPressed()
-        }
+        }*/
     }
 }
