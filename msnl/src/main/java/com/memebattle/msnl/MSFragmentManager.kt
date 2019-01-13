@@ -99,7 +99,7 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
 
     fun backTo(fragmentTag: String) {
         getBackStack().reversed().forEach {
-            if(fragmentTag == it.tag) {
+            if (fragmentTag == it.tag) {
                 return
             }
             back()
@@ -107,8 +107,12 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
     }
 
     fun exit() {
-        fragmentManager.beginTransaction()
-                .remove(getBackStack().last())
-                .commit()
+        getBackStack().reversed().forEachIndexed { index, fragment ->
+            if (index == 2)
+                return
+            fragmentManager.beginTransaction()
+                    .remove(fragment)
+                    .commit()
+        }
     }
 }

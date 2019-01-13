@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.memebattle.msnl.IOnBackPressed
 import com.memebattle.msnl.MSFragmentManager
 import com.memebattle.multistacknavigationlibrary.main.MainFragment
+import com.memebattle.multistacknavigationlibrary.main.fragment.messages.MessagesFragment
 
 class MainActivity : AppCompatActivity() {
 
