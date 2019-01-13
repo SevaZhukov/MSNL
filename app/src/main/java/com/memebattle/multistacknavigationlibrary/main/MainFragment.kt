@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.memebattle.msnl.IOnBackPressed
-import com.memebattle.msnl.MSFragmentManager
 import com.memebattle.msnl.MSNavigation
 import com.memebattle.msnl.msFragmentManager
 import com.memebattle.multistacknavigationlibrary.R

@@ -2,11 +2,8 @@ package com.memebattle.multistacknavigationlibrary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
-import com.memebattle.goldextensions.log
 import com.memebattle.msnl.IOnBackPressed
 import com.memebattle.msnl.MSFragmentManager
-import com.memebattle.msnl.msFragmentManager
 import com.memebattle.multistacknavigationlibrary.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
