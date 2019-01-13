@@ -91,7 +91,16 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
         replace(backStack.last())
     }
 
-    fun pop() {
+    fun back() {
         fragmentManager.popBackStack()
+    }
+
+    fun backTo(fragmentTag: String) {
+        getBackStack().reversed().forEach {
+            if(fragmentTag == it.tag) {
+                return
+            }
+            back()
+        }
     }
 }

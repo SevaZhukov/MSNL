@@ -45,18 +45,15 @@ class MSNavigation(private val msFragmentManager: MSFragmentManager) {
     }
 
     fun onBackPressed() {
-        log("on back press msnav ${msFragmentManager.getBackStack()}")
-        log("${msFragmentManager.getBackStack().last()}")
-        log("${mapOfStartFragments[orderOfStacks.last().title.toString()]}")
         val startFragmentOfThisStack = mapOfStartFragments[orderOfStacks.last().title.toString()]
         val currentFragment = msFragmentManager.getBackStack().last()
         if(startFragmentOfThisStack == currentFragment) {
             log("==")
-            log("$orderOfStacks")
             orderOfStacks.removeLast()
-            log("$orderOfStacks")
             bottomNavigationView.menu[orderOfStacks.last().title.toString()]!!.isChecked = true
-            msFragmentManager.pop()
+            msFragmentManager.setBackStack(mapOfStacks[orderOfStacks.last().title.toString()]!!)
+        } else {
+            msFragmentManager.back()
         }
     }
 
