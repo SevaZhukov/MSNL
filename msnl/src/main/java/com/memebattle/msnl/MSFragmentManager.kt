@@ -105,4 +105,10 @@ class MSFragmentManager(private val fragmentManager: FragmentManager) {
             back()
         }
     }
+
+    fun exit() {
+        fragmentManager.beginTransaction()
+                .remove(getBackStack().last())
+                .commit()
+    }
 }
