@@ -4,7 +4,6 @@ import android.view.MenuItem
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.memebattle.goldextensions.log
 
 abstract class MSNavigation {
 
@@ -51,10 +50,8 @@ abstract class MSNavigation {
             val startFragmentOfThisStack = mapOfStartFragments[orderOfStacks.last().title.toString()]
             val currentFragment = msFragmentManager.getBackStack().last()
             if (startFragmentOfThisStack == currentFragment) {
-                log("${orderOfStacks.size} ${msFragmentManager.getBackStack()}")
                 if (orderOfStacks.size == 1) {
                     msFragmentManager.exit()
-                    log("${msFragmentManager.getBackStack()}")
                 } else {
                     orderOfStacks.removeLast()
                     bottomNavigationView.menu[orderOfStacks.last().title.toString()]!!.isChecked = true

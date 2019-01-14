@@ -18,14 +18,11 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 class MainFragment : Fragment(), IOnBackPressed {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val v = inflater.inflate(R.layout.fragment_main, container, false)
         msFragmentManager.localContainerId = R.id.local_container
         val fragments = arrayListOf(NewsFragment(), MessagesFragment(), FriendsFragment(), ProfileFragment())
-        MSNavigation.setupNavigation(msFragmentManager, view.bottomNavigationView, fragments)
+        MSNavigation.setupNavigation(msFragmentManager, v.bottomNavigationView, fragments)
+        return v
     }
 
     override fun onBackPressed(): Boolean {
